@@ -26,6 +26,7 @@ declare type LoginUser = {
 };
 
 declare type User = {
+	name?: string;
 	$id: string;
 	email: string;
 	userId: string;
@@ -210,6 +211,7 @@ declare interface TotalBalanceBoxProps {
 
 declare interface FooterProps {
 	user: User;
+	type?: "desktop" | "mobile"
 }
 
 declare interface RightSidebarProps {
@@ -312,7 +314,7 @@ declare interface createBankAccountProps {
 	accountId: string;
 	bankId: string;
 	fundingSourceUrl: string;
-	sharableId: string;
+	shareableId: string;
 }
 
 declare interface getBanksProps {

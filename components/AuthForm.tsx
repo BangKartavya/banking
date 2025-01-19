@@ -14,6 +14,8 @@ import CustomInput from "@/components/CustomInput";
 import {authFormSchema} from "@/lib/utils";
 import {Loader2} from "lucide-react";
 import {useRouter} from "next/navigation";
+import {signIn, signUp} from '@/lib/actions/user.actions';
+import PlaidLink from './PlaidLink';
 
 
 const AuthForm = ({type}: AuthFormProps) => {
@@ -23,7 +25,6 @@ const AuthForm = ({type}: AuthFormProps) => {
 
 	const formSchema = authFormSchema(type);
 
-	// 1. Define your form.
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -36,7 +37,7 @@ const AuthForm = ({type}: AuthFormProps) => {
 			postalcode: "",
 
 			dateOfBirth: "",
-			aadhar: "",
+			ssn: "",
 			state: "",
 
 			city: ""
@@ -46,24 +47,32 @@ const AuthForm = ({type}: AuthFormProps) => {
 	const onSubmit = async (data: z.infer<typeof formSchema>) => {
 		setisloading(true);
 		try {
-			// Sign up with appwrite and create plaid token
-
 			if (type === "sign-up") {
-				/*
-				const newUser = await signUp(data);
+				const userData = {
+					firstName: data.firstName!,
+					lastName: data.lastName!,
+					address1: data.address1!,
+
+					state: data.state!,
+					email: data.email!,
+					password: data.password!,
+
+					ssn: data.ssn!,
+					city: data.city!,
+					postalCode: data.postalcode!,
+
+					dateOfBirth: data.dateOfBirth!
+				};
+				const newUser = await signUp(userData);
 
 				setUser(newUser);
-				*/
 
 			} else {
-				/*
 				const response = await signIn({
 					email: data.email,
 					password: data.password
 				});
-
 				if (response) router.push("/");
-				*/
 			}
 
 		} catch (error) {
@@ -102,7 +111,10 @@ const AuthForm = ({type}: AuthFormProps) => {
 			</header>
 			{user ? (
 				<div className="flex flex-col gap-4">
-					{/*TODO PlaidLink*/}
+					<PlaidLink
+						user={user!}
+						variant="primary"
+					/>
 				</div>
 			) : (
 				<>
@@ -156,12 +168,12 @@ const AuthForm = ({type}: AuthFormProps) => {
 											control={form.control}
 											name="dateOfBirth"
 											label="Date of Birth"
-											placeholder="MM/DD/YYYY"
+											placeholder="YYYY-MM-DD"
 										/>
 										<CustomInput
 											control={form.control}
-											name="aadhar"
-											label="Aadhar Number"
+											name="ssn"
+											label="Social Security Number"
 											placeholder="123412341234"
 										/>
 									</div>
