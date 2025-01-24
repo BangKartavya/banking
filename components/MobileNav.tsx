@@ -16,6 +16,7 @@ import {cn} from "@/lib/utils";
 import {usePathname} from "next/navigation";
 import {VisuallyHidden} from "@radix-ui/react-visually-hidden";
 import Footer from "@/components/Footer";
+import PlaidLink from "@/components/PlaidLink";
 
 const MobileNav = ({user}: MobileNavProps) => {
 	const pathname = usePathname();
@@ -66,7 +67,7 @@ const MobileNav = ({user}: MobileNavProps) => {
 										</SheetClose>
 									)
 								})}
-								USER
+								<PlaidLink user={user}/>
 							</nav>
 						</SheetClose>
 						<Footer
@@ -74,7 +75,6 @@ const MobileNav = ({user}: MobileNavProps) => {
 							type="mobile"
 						/>
 					</div>
-					USER
 				</SheetContent>
 			</Sheet>
 		</section>
