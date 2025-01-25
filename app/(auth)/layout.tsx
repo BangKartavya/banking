@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
 
-const Root = () => ({
-						children,
-					}: Readonly<{
+const AuthLayout = () => ({
+							  children,
+						  }: Readonly<{
 	children: React.ReactNode;
 }>) => (
 	<main className="flex min-h-screen w-full justify-between font-inter">
@@ -21,4 +21,4 @@ const Root = () => ({
 	</main>
 );
 
-export default Root;
+export default AuthLayout;
