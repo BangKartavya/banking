@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
 
-export default ({
-					children,
-				}: Readonly<{
+const Root = () => ({
+						children,
+					}: Readonly<{
 	children: React.ReactNode;
 }>) => (
 	<main className="flex min-h-screen w-full justify-between font-inter">
@@ -19,4 +19,6 @@ export default ({
 			</div>
 		</div>
 	</main>
-)
+);
+
+export default Root;
